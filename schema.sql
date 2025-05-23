@@ -8,7 +8,7 @@ CREATE TABLE Stores (
 CREATE TABLE Receipts (
     ID                  INTEGER PRIMARY KEY,
     StoreID             INTEGER NOT NULL,
-    TripDateTime        TEXT    NOT NULL -- ISO 8601: 'YYYY-MM-DDTHH:MM:SS',
+    TripDateTime        TEXT    NOT NULL, -- ISO 8601: 'YYYY-MM-DDTHH:MM:SS',
     Notes               TEXT,
     FOREIGN KEY (StoreID) REFERENCES Stores(ID)
 )
@@ -20,7 +20,7 @@ CREATE TABLE Items (
     Name                TEXT    NOT NULL,
     Quantity            REAL    NOT NULL,
     OriginalUnitPrice   REAL    NOT NULL,
-    DiscountedUnitPrice REAL    NOT NULL,
+    DiscountedUnitPrice REAL,
     PricePaid           REAL    NOT NULL,
     Notes               TEXT,
     FOREIGN KEY (ReceiptID) REFERENCES Receipts(ID)
