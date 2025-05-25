@@ -1,9 +1,3 @@
-INSERT INTO Stores(Name, Location) 
-VALUES
-    ("Walmart", "Dallas Neighborhood Market"),
-    ("Target", "Cityplace Market")
-;
-
 INSERT INTO Receipts(StoreID, TripDateTime)
 VALUES
     (1, '2025-05-22T20:17:18'),
