@@ -1,3 +1,8 @@
+drop table if exists Stores;
+drop table if exists Products;
+drop table if exists ProductPrices;
+
+
 -- Stores table
 CREATE TABLE Stores (
     ID INTEGER PRIMARY KEY,
