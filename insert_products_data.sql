@@ -15,7 +15,7 @@ CREATE TEMP TABLE temp_Products (
 
 -- Insert into the actual Products table (auto-generates ID)
 INSERT INTO Products (Name, Brand, UnitSize, UnitType, Notes)
-SELECT Name, Brand, UnitSize, UnitType, Notes 
+SELECT Name, Brand,  UnitSize, UnitType, Notes 
 FROM temp_Products
 WHERE Name != 'Name';
 
