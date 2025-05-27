@@ -14,6 +14,7 @@ CREATE TABLE Stores (
 CREATE TABLE Products (
     ID INTEGER PRIMARY KEY,
     Name TEXT NOT NULL,           -- General product name (e.g., "Black Beans (store brand)")
+    Brand TEXT NOT NULL,
     UnitSize REAL NOT NULL,       -- Numeric size of the unit (e.g., 15 for 15oz)
     UnitType TEXT NOT NULL,       -- Unit type (e.g., 'oz', 'lb', 'ct')
     Notes TEXT                    -- Optional notes (e.g., "no salt", "organic")
