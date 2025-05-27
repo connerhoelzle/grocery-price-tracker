@@ -1,3 +1,4 @@
-.read insert_stores.sql
-.read insert_2025-05-22_purchases.sql
-.read insert_2025_05_24_prices.sql
+.read insert_stores_data.sql
+.read insert_receipts_data.sql
+.read insert_items_data.sql
+.read insert_reference-prices_data.sql
