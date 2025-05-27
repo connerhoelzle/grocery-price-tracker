@@ -17,7 +17,7 @@ CREATE TABLE Products (
 -- ProductPrices table (combined receipts and web scrapes)
 CREATE TABLE ProductPrices (
     ID INTEGER PRIMARY KEY,
-    ProductID INTEGER NOT NULL,   -- Foreign key to Products.ID
+    ProductID INTEGER,   -- Foreign key to Products.ID
     StoreID INTEGER NOT NULL,     -- Foreign key to Stores.ID
     Date TEXT NOT NULL,           -- ISO 8601 format (YYYY-MM-DD)
     Quantity REAL NOT NULL,       -- Quantity purchased or observed (e.g., 1, 0.5, 2)
