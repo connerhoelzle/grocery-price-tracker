@@ -1,3 +1,6 @@
+-- Delete data from Stores
+delete from Stores;
+
 -- Drop and create a temporary table that matches your CSV
 DROP TABLE IF EXISTS temp_Stores;
 CREATE TEMP TABLE temp_Stores (

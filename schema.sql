@@ -1,6 +1,7 @@
 drop table if exists Stores;
 drop table if exists Products;
 drop table if exists ProductPrices;
+drop table if exists ProductGroups;
 
 
 -- Stores table
@@ -10,27 +11,33 @@ CREATE TABLE Stores (
     Location TEXT NOT NULL
 );
 
--- Products table (normalized product catalog)
-CREATE TABLE Products (
+-- ProductGroups table (normalized comparison unit)
+CREATE TABLE ProductGroups (
     ID INTEGER PRIMARY KEY,
-    Name TEXT NOT NULL,           -- General product name (e.g., "Black Beans (store brand)")
-    Brand TEXT NOT NULL,
-    UnitSize REAL NOT NULL,       -- Numeric size of the unit (e.g., 15 for 15oz)
-    UnitType TEXT NOT NULL,       -- Unit type (e.g., 'oz', 'lb', 'ct')
-    Notes TEXT                    -- Optional notes (e.g., "no salt", "organic")
+    Name TEXT NOT NULL,           -- e.g., "Whole Milk"
+    UnitSize REAL NOT NULL,      -- e.g., 1.0
+    UnitType TEXT NOT NULL       -- e.g., 'gal', 'oz', etc.
 );
 
--- ProductPrices table (combined receipts and web scrapes)
+-- Products table (store-specific instances of a product group)
+CREATE TABLE Products (
+    ID INTEGER PRIMARY KEY,
+    Name TEXT NOT NULL,           -- Specific item name from receipt or website
+    Brand TEXT,                   -- Optional store or brand name
+    GroupID INTEGER NOT NULL,     -- Foreign key to ProductGroups
+    FOREIGN KEY (GroupID) REFERENCES ProductGroups(ID)
+);
+
+-- ProductPrices table (each observation of a product's price)
 CREATE TABLE ProductPrices (
     ID INTEGER PRIMARY KEY,
-    ProductID INTEGER,   -- Foreign key to Products.ID
-    StoreID INTEGER NOT NULL,     -- Foreign key to Stores.ID
-    Date TEXT NOT NULL,           -- ISO 8601 format (YYYY-MM-DD)
-    Quantity REAL NOT NULL,       -- Quantity purchased or observed (e.g., 1, 0.5, 2)
-    TotalPrice REAL NOT NULL,     -- Total price for the quantity
-    UnitPrice REAL,               -- Optional: listed or calculated price per unit
-    Source TEXT NOT NULL,         -- 'receipt', 'web', etc.
-    Notes TEXT,                   -- Optional notes
+    ProductID INTEGER NOT NULL,   -- Link to Products
+    StoreID INTEGER NOT NULL,     -- Link to Stores
+    Date TEXT NOT NULL,           -- ISO 8601 (YYYY-MM-DD)
+    Quantity REAL NOT NULL,       -- Quantity purchased or listed (e.g., 1 for one unit)
+    TotalPrice REAL NOT NULL,     -- Full price paid or listed for the quantity
+    UnitPrice REAL,               -- Optional precomputed price per oz/lb/etc.
+    Source TEXT NOT NULL,
     FOREIGN KEY (ProductID) REFERENCES Products(ID),
     FOREIGN KEY (StoreID) REFERENCES Stores(ID)
 );
