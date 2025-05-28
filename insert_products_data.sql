@@ -1,3 +1,5 @@
+-- Delete data from Products
+delete from Products;
 -- Drop and create a temporary table that matches your CSV
 DROP TABLE IF EXISTS temp_Products;
 CREATE TEMP TABLE temp_Products (
