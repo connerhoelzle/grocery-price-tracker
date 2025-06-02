@@ -2,6 +2,7 @@ drop table if exists Stores;
 drop table if exists Products;
 drop table if exists ProductPrices;
 drop table if exists ProductGroups;
+drop view if exists AveragePriceByStore;
 
 
 -- Stores table
@@ -41,3 +42,11 @@ CREATE TABLE ProductPrices (
     FOREIGN KEY (ProductID) REFERENCES Products(ID),
     FOREIGN KEY (StoreID) REFERENCES Stores(ID)
 );
+
+CREATE VIEW AveragePriceByStore AS 
+SELECT s.Name, pg.Name, PRINTF("%.2f", ROUND(AVG(pp.TotalPrice), 2)) AS AveragePrice
+FROM ProductGroups pg
+JOIN Products p ON pg.ID=p.GroupID
+JOIN ProductPrices pp ON p.ID=pp.ProductID
+JOIN Stores s ON pp.StoreID=s.ID
+GROUP BY pg.Name, s.Name
