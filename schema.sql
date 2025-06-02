@@ -43,8 +43,8 @@ CREATE TABLE ProductPrices (
     FOREIGN KEY (StoreID) REFERENCES Stores(ID)
 );
 
-CREATE VIEW AveragePriceByStore AS 
-SELECT s.Name AS Store, pg.Name AS Product, PRINTF("%.2f", ROUND(AVG(pp.TotalPrice), 2)) AS AveragePrice
+CREATE VIEW AveragePriceByStore AS
+SELECT s.Name AS Store, pg.Name AS Product, PRINTF("%.2f", ROUND(AVG(pp.TotalPrice), 2) / (pp.Quantity)) AS Price, pg. UnitSize AS Amount, pg.UnitType AS Unit
 FROM ProductGroups pg
 JOIN Products p ON pg.ID=p.GroupID
 JOIN ProductPrices pp ON p.ID=pp.ProductID
