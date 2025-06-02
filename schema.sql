@@ -44,7 +44,7 @@ CREATE TABLE ProductPrices (
 );
 
 CREATE VIEW AveragePriceByStore AS 
-SELECT s.Name, pg.Name, PRINTF("%.2f", ROUND(AVG(pp.TotalPrice), 2)) AS AveragePrice
+SELECT s.Name AS Store, pg.Name AS Product, PRINTF("%.2f", ROUND(AVG(pp.TotalPrice), 2)) AS AveragePrice
 FROM ProductGroups pg
 JOIN Products p ON pg.ID=p.GroupID
 JOIN ProductPrices pp ON p.ID=pp.ProductID
