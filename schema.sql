@@ -49,4 +49,5 @@ FROM ProductGroups pg
 JOIN Products p ON pg.ID=p.GroupID
 JOIN ProductPrices pp ON p.ID=pp.ProductID
 JOIN Stores s ON pp.StoreID=s.ID
-GROUP BY pg.Name, s.Name
+GROUP BY pg.ID, s.ID
+;
